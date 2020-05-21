@@ -1,0 +1,21 @@
+body,
+html {
+  height: 100%;
+}
+
+.bg {
+  background-image: url("../assets/img/76ae5079d3131fe5046f3f35068bef8d.jpg");
+  height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.dark {
+  background-color: rgb(0, 0, 0, .5);
+}
+
+.sticky-footer {
+  left: 0;
+  bottom: 0;
+}
