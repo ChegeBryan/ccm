@@ -2,9 +2,17 @@
 require_once '../includes/config.php';
 
 $username = $id_number = $password = $confirm_password = "";
+$fullname = $mobile = $email = $id_number = "";
+
 $username_err = $id_number_err = $password_err = $confirm_password_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  $fullname = trim($_POST["full_name"]);
+  $mobile = trim($_POST["mobile_number"]);
+  $email = trim($_POST["email"]);
+  $id_number = trim($_POST["id_number"]);
+
   if (empty(trim($_POST["username"]))) {
     $username_err = "Please enter a username.";
   } else {
@@ -94,7 +102,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $stmt->close();
     }
   }
-  $conn->close();
 }
 ?>
 <!DOCTYPE html>
@@ -129,18 +136,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="name">Full Name</label>
-              <input type="text" class="form-control" placeholder="Enter full names" name="full_name" required>
+              <input type="text" class="form-control" placeholder="Enter full names" name="full_name"
+                     value="<?php echo $fullname; ?>" required>
             </div>
             <div class="form-group col-md-6 <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
               <label for="name">Username</label>
-              <input type="text" class="form-control" placeholder="Enter Username to use" name="username" required>
+              <input type="text" class="form-control" placeholder="Enter Username to use" name="username"
+                     value="<?php echo $username; ?>" required>
               <span class="form-text text-danger"><small><?php echo $username_err; ?></small></span>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6 <?php echo (!empty($id_number_err)) ? 'has-error' : ''; ?>">
               <label for="id_number">National ID</label>
-              <input type="text" class="form-control" id="id_number" name="id_number" placeholder="National ID number">
+              <input type="text" class="form-control" id="id_number" name="id_number" placeholder="National ID number"
+                     value="<?php echo $id_number; ?>">
               <span class="form-text text-danger"><small><?php echo $id_number_err; ?></small></span>
             </div>
             <div class="form-group col-md-6">
@@ -169,11 +179,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="email"><b>Email</b></label>
-              <input type="email" placeholder="Enter Email" class="form-control" name="email" required>
-            </div>
-            <div class="form-group col-md-6">
+              <input type="email" placeholder="Enter Email" class="form-control" name="email"
+                     value="<?php echo $email; ?>"" required>
+          </div>
+          <div class=" form-group col-md-6">
               <label for="mobile"><b>Mobile Number</b></label>
-              <input type="text" class="form-control" placeholder="Enter mobile number" name="mobile_number" required>
+              <input type="text" class="form-control" placeholder="Enter mobile number" name="mobile_number"
+                     value="<?php echo $mobile; ?>" required>
             </div>
           </div>
           <div class="form-row">
