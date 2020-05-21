@@ -36,8 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt = $conn->prepare($sql)) {
       $stmt->bind_param("si", $param_password, $param_id);
 
-      $param_password = password_hash($new_password, PASSWORD_DEFAULT);
-      $param_id = $_GET["id"];
+      $param_password = password_hash(trim($_POST["new_psw"]), PASSWORD_DEFAULT);
+      $param_id = $_GET["farmer"];
 
       if ($stmt->execute()) {
         session_destroy();

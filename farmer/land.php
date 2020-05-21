@@ -97,12 +97,11 @@ require_once '../includes/config.php';
               </div>
               <!-- Card Body -->
               <div class="card-body">
-                <form action="<?php echo "add_land.php?farmer=" . $_GET["farmer"]; ?>" method="POST"
-                      class="needs-validation" novalidate>
+                <form action="<?php echo "add_land.php?farmer=" . $_GET["farmer"]; ?>" method="POST">
                   <div class="form-group">
                     <label for="land_size" class="text-secondary">Land size (Acres)</label>
                     <input type="number" class="form-control" id="land_size" placeholder="Land Size" name="land_size"
-                           required>
+                           min="0" required>
                     <span class="form-text"><small></small></span>
                   </div>
                   <div class="form-group">

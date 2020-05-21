@@ -17,7 +17,7 @@ CREATE TABLE `ccm_admins` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 INSERT INTO `ccm_admins` (`id`, `username`, `password`) VALUES
-(1, 'admin001', '$2y$10$wP6ZlkDZQAHi4fMvIJFuAu06EjgxxFqvg.NpdkScDBbNeoDGGDb0O');
+(1, 'admin001', '$2y$10$UwOHw.V2QO8vaI7pfYTbc.UkUMgrgF3algALFMIypG/S/c8cf6xRe');
 
 CREATE TABLE `ccm_advisors` (
   `id` int(11) NOT NULL,
@@ -26,6 +26,10 @@ CREATE TABLE `ccm_advisors` (
   `password` varchar(255) NOT NULL,
   `approved` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+INSERT INTO `ccm_advisors` (`id`, `fullname`, `username`, `password`, `approved`) VALUES
+(1, 'Chege Bryan', 'admin001', '$2y$10$z/WmUq0h8.NGPW4tNta95upbqpsJwnJ0vhZ813qvfJk.11PcfdmYS', 1),
+(2, 'Chege Bryan', 'advisor001', '$2y$10$x80.bRxhlvzyK8jS968aF.Y84UnqYcLZQZVuqFiwqSStsmlQCZ7oe', 1);
 
 CREATE TABLE `ccm_alerts` (
   `id` int(11) NOT NULL,
@@ -59,10 +63,21 @@ CREATE TABLE `ccm_bookings` (
   `paid` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
+INSERT INTO `ccm_bookings` (`id`, `booked_by`, `product_to_deliver`, `quantity_to_deliver`, `date_booked`, `delivery_date`, `approved_on`, `approved`, `paid`) VALUES
+(1, 1, 1, 23, '2020-05-21 19:44:55', '2020-05-22', '0000-00-00 00:00:00', 0, 0);
+
 CREATE TABLE `ccm_cereals` (
   `id` int(11) NOT NULL,
   `grain` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+INSERT INTO `ccm_cereals` (`id`, `grain`) VALUES
+(1, 'Maize'),
+(2, 'Beans'),
+(3, 'Wheat'),
+(4, 'Sorghum'),
+(5, 'Millet'),
+(6, 'Rice');
 
 CREATE TABLE `ccm_complaints` (
   `id` int(11) NOT NULL,
@@ -74,6 +89,9 @@ CREATE TABLE `ccm_complaints` (
   `handled_by` int(11) DEFAULT NULL,
   `handled_on` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+INSERT INTO `ccm_complaints` (`id`, `raised_by`, `subject`, `message`, `made_on`, `handled`, `handled_by`, `handled_on`) VALUES
+(1, 1, 'Water is bad', 'asasdsdasda', '2020-05-21 19:33:08', 0, NULL, NULL);
 
 CREATE TABLE `ccm_counties` (
   `id` int(11) NOT NULL,
@@ -97,10 +115,17 @@ CREATE TABLE `ccm_farmers` (
   `approved` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
+INSERT INTO `ccm_farmers` (`id`, `fullname`, `username`, `national_id`, `mobile_number`, `email`, `location`, `pic`, `password`, `approved`) VALUES
+(1, 'ryan029', 'farmer001', 1234123121, '+254719841421', 'cbbryan8@gmail.com', 1, '../profileImages/profileDefault.png', '$2y$10$mQYrcEGEF2jn380d3RGMjOTlBtw8nj8gR9lH0UAIGMG0iCMz3E6bq', 1);
+
 CREATE TABLE `ccm_farm_inputs` (
   `id` int(11) NOT NULL,
   `farm_input` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+INSERT INTO `ccm_farm_inputs` (`id`, `farm_input`) VALUES
+(1, 'Planting Fertilizer'),
+(2, 'Top-Dressing Fertilizer');
 
 CREATE TABLE `ccm_farm_input_payments` (
   `id` int(11) NOT NULL,
@@ -127,6 +152,12 @@ CREATE TABLE `ccm_land` (
   `cereal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
+INSERT INTO `ccm_land` (`id`, `owner`, `land_size`, `cereal`) VALUES
+(1, 1, -1, 2),
+(2, 1, -344, 2),
+(3, 1, -3343, 2),
+(4, 1, -34, 1);
+
 CREATE TABLE `ccm_messages` (
   `id` int(11) NOT NULL,
   `asked_by` int(11) NOT NULL,
@@ -134,6 +165,9 @@ CREATE TABLE `ccm_messages` (
   `asked_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `replied` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+INSERT INTO `ccm_messages` (`id`, `asked_by`, `message`, `asked_on`, `replied`) VALUES
+(1, 1, 'aassdsdfds dfdfsdf sdfsd sdfsdfsdf', '2020-05-21 19:35:08', 0);
 
 CREATE TABLE `ccm_replies` (
   `id` int(11) NOT NULL,
@@ -224,7 +258,7 @@ ALTER TABLE `ccm_admins`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 ALTER TABLE `ccm_advisors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 ALTER TABLE `ccm_alerts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
@@ -233,22 +267,22 @@ ALTER TABLE `ccm_appointments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `ccm_bookings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 ALTER TABLE `ccm_cereals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 ALTER TABLE `ccm_complaints`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 ALTER TABLE `ccm_counties`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 ALTER TABLE `ccm_farmers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 ALTER TABLE `ccm_farm_inputs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 ALTER TABLE `ccm_farm_input_payments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
@@ -257,10 +291,10 @@ ALTER TABLE `ccm_farm_produce_payments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `ccm_land`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 ALTER TABLE `ccm_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 ALTER TABLE `ccm_replies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
