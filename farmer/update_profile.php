@@ -1,6 +1,8 @@
 <?php
 require_once '../includes/config.php';
 
+session_start();
+
 $username = "";
 $username_err = "";
 
@@ -52,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $param_id = $_GET["farmer"];
 
       if ($stmt->execute()) {
-        echo "here";
+        $_SESSION["farmer_fullname"] = trim($_POST["fullname"]);
         header("location: edit_profile.php?farmer=" . $_GET["farmer"]);
       } else {
         header("location: ../error.php");
