@@ -193,7 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <label for="psw"><b>Password</b></label>
               <input type="password" class="form-control" placeholder="Enter Password" name="psw"
                      value="<?php echo $password; ?>" required>
-              <span class="form-text"><small><?php echo $password_err; ?></small></span>
+              <span class="form-text text-danger"><small><?php echo $password_err; ?></small></span>
             </div>
             <div class="form-group col-md-6 <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
               <label for="psw"><b>Confirm Password</b></label>

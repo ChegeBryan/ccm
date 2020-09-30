@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="psw" class="text-muted"><b>Password</b></label>
             <input type="password" class="form-control" placeholder="Enter Password" name="psw"
                    value="<?php echo $password; ?>" required>
-            <span class="form-text"><small><?php echo $password_err; ?></small></span>
+            <span class="form-text text-danger"><small><?php echo $password_err; ?></small></span>
 
           </div>
 
