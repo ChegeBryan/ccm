@@ -91,9 +91,10 @@
     </a>
     <div id="collapseVisits" class="collapse" aria-labelledby="headingVisits" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Visit Type:</h6>
+        <h6 class="collapse-header">Approval Type:</h6>
         <a class="collapse-item" href="<?php echo "n_bookings.php?staff=" . $_GET["staff"]; ?>">Bookings</a>
         <a class="collapse-item" href="<?php echo "n_appointments.php?staff=" . $_GET["staff"]; ?>">Appointments</a>
+        <a class="collapse-item" href="<?php echo "n_farmers.php?staff=" . $_GET["staff"]; ?>">Farmers</a>
       </div>
     </div>
   </li>
