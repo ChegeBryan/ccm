@@ -101,7 +101,7 @@ require_once '../includes/config.php';
                       echo "<td>" . $row['farm_input'] . "</td>";
                       echo "<td>" . $row['quantity'] . "</td>";
                       echo "<td>" . date('M-d-Y', strtotime($row['confirmed_on'])) . "</td>";
-                      echo "<td>" . date('M-d-Y H:i', strtotime($row['pick_date'])) . "</td>";
+                      echo "<td>" . date('M-d-Y', strtotime($row['pick_date'])) . "</td>";
                       echo "</tr>";
 
                       $n++;
