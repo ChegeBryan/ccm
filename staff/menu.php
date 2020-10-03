@@ -13,13 +13,14 @@
 
     <!-- Nav Item - User Information -->
     <li class="nav-item dropdown no-arrow">
-      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+         aria-haspopup="true" aria-expanded="false">
         <span class="mr-2 d-none d-lg-inline text-secondary small"><?php echo $_SESSION["staff_fullname"]; ?></span>
         <img class="img-profile rounded-circle" src="../profileImages/profileDefault.png">
       </a>
       <!-- Dropdown - User Information -->
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-        <a class="dropdown-item" href="<? echo 'dashboard.php?staff=' . $_GET['staff']; ?>">
+        <a class="dropdown-item" href="<?php echo 'dashboard.php?staff=' . $_GET['staff']; ?>">
           <i class="fa fa-user fa-xs fa-fw mr-2 text-secondary"></i>
           Profile
         </a>
@@ -40,7 +41,8 @@
 <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo "dashboard.php?staff=" . $_SESSION["staff_id"] ?>">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center"
+     href="<?php echo "dashboard.php?staff=" . $_SESSION["staff_id"] ?>">
     <div class="sidebar-brand-icon">
       <i class="fa fa-support"></i>
     </div>
@@ -66,11 +68,13 @@
   </div>
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseApprovedVisits" aria-expanded="true" aria-controls="collapseApprovedVisits">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseApprovedVisits"
+       aria-expanded="true" aria-controls="collapseApprovedVisits">
       <i class="fa fa-truck fa-fw"></i>
       <span>Approved Visits</span>
     </a>
-    <div id="collapseApprovedVisits" class="collapse" aria-labelledby="headingApprovedVisits" data-parent="#accordionSidebar">
+    <div id="collapseApprovedVisits" class="collapse" aria-labelledby="headingApprovedVisits"
+         data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Visit Type:</h6>
         <a class="collapse-item" href="<?php echo "a_bookings.php?staff=" . $_GET["staff"]; ?>">Bookings</a>
@@ -80,7 +84,8 @@
   </li>
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVisits" aria-expanded="true" aria-controls="collapseVisits">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVisits" aria-expanded="true"
+       aria-controls="collapseVisits">
       <i class="fa fa-truck fa-fw"></i>
       <span>Pending Approval</span>
     </a>
@@ -102,11 +107,13 @@
   </div>
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePaymentsDesk" aria-expanded="true" aria-controls="collapsePaymentsDesk">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePaymentsDesk"
+       aria-expanded="true" aria-controls="collapsePaymentsDesk">
       <i class="fa fa-money fa-fw"></i>
       <span>Payments Desk</span>
     </a>
-    <div id="collapsePaymentsDesk" class="collapse" aria-labelledby="headingPaymentsDesk" data-parent="#accordionSidebar">
+    <div id="collapsePaymentsDesk" class="collapse" aria-labelledby="headingPaymentsDesk"
+         data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Payment Options:</h6>
         <a class="collapse-item" href="<?php echo "p_payment.php?staff=" . $_GET["staff"]; ?>">Farmer
