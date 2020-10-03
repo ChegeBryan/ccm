@@ -20,7 +20,7 @@
       </a>
       <!-- Dropdown - User Information -->
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-        <a class="dropdown-item" href="<? echo 'dashboard.php?farmer=' . $_GET['farmer']; ?>">
+        <a class="dropdown-item" href="<?php echo 'dashboard.php?farmer=' . $_GET['farmer']; ?>">
           <i class="fa fa-user fa-xs fa-fw mr-2 text-secondary"></i>
           Profile
         </a>
