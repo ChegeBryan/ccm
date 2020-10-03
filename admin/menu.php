@@ -141,7 +141,7 @@
 
       <li class="nav-item">
         <a class="nav-link" href="<?php echo 'cereal_grain.php?admin=' . $_SESSION['admin_id']; ?>">
-          <i class="fa fa-fw fa-compass"></i>
+          <i class="fa fa-fw fa-lemon-o"></i>
           <span>Cereals & Grains</span></a>
       </li>
       <hr class="sidebar-divider d-none d-md-block">
