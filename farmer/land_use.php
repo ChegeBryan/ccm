@@ -105,3 +105,17 @@ if ($stmt = $conn->prepare($sql)) {
   $result->free();
 }
 $stmt->close();
+
+if ($stmt = $conn->prepare($sql)) {
+  $stmt->bind_param("si", $param_grain, $param_owner);
+
+  $param_grain = 'Millet';
+  $param_owner = $_GET['farmer'];
+
+  if ($stmt->execute()) {
+    $result = $stmt->get_result();
+    $millet += $result->fetch_row()[0];
+  }
+  $result->free();
+}
+$stmt->close();
