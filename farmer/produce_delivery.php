@@ -137,14 +137,14 @@ require_once '../includes/config.php';
                   </div>
                   <div class="form-group">
                     <label for="quantity" class="text-secondary">Product Quantity (Kgs)</label>
-                    <input type="number" class="form-control" id="quantity" placeholder="Quantity to deliver"
-                           name="quantity" min="1" required>
+                    <input type="number" class="form-control" id="quantity"
+                           placeholder="Quantity to deliver. Must be more than 0." name="quantity" min="1" required>
                     <span class="form-text text-danger"><small></small></span>
                   </div>
                   <div class="form-group">
                     <label for="d_date" class="text-secondary">Date to make deliver</label>
-                    <input type="date" class="form-control" id="d_date" placeholder="Quantity to deliver" name="d_date"
-                           min="<?php echo date("Y-m-d"); ?>" onkeydown="return false" required>
+                    <input type="date" class="form-control" id="d_date" name="d_date" min="<?php echo date("Y-m-d"); ?>"
+                           onkeydown="return false" required>
                     <span class="form-text text-danger"><small></small></span>
                   </div>
                   <button class="btn btn-success text-capitalize btn-block">Make booking</button>
