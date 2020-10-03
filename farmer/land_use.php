@@ -2,7 +2,7 @@
 
 require_once "../includes/config.php";
 
-$sql = "SELECT land_size \n"
+$sql = "SELECT COALESCE(SUM(land_size), 0) \n"
 
   . "FROM ccm_land\n"
 
@@ -12,13 +12,6 @@ $sql = "SELECT land_size \n"
 
   . "WHERE ccm_cereals.grain = ? AND ccm_land.owner = ?";
 
-$maize = 0;
-$wheat = 0;
-$millet = 0;
-$sorghum = 0;
-$rice = 0;
-$beans = 0;
-
 if ($stmt = $conn->prepare($sql)) {
   $stmt->bind_param("si", $param_grain, $param_owner);
 
@@ -27,7 +20,7 @@ if ($stmt = $conn->prepare($sql)) {
 
   if ($stmt->execute()) {
     $result = $stmt->get_result();
-    $maize += $result->fetch_row()[0];
+    $maize = $result->fetch_row()[0];
   }
   $result->free();
 }
@@ -41,7 +34,7 @@ if ($stmt = $conn->prepare($sql)) {
 
   if ($stmt->execute()) {
     $result = $stmt->get_result();
-    $wheat += $result->fetch_row()[0];
+    $wheat = $result->fetch_row()[0];
   }
   $result->free();
 }
@@ -56,7 +49,7 @@ if ($stmt = $conn->prepare($sql)) {
 
   if ($stmt->execute()) {
     $result = $stmt->get_result();
-    $rice += $result->fetch_row()[0];
+    $rice = $result->fetch_row()[0];
   }
   $result->free();
 }
@@ -70,7 +63,7 @@ if ($stmt = $conn->prepare($sql)) {
 
   if ($stmt->execute()) {
     $result = $stmt->get_result();
-    $sorghum += $result->fetch_row()[0];
+    $sorghum = $result->fetch_row()[0];
   }
   $result->free();
 }
@@ -85,7 +78,7 @@ if ($stmt = $conn->prepare($sql)) {
 
   if ($stmt->execute()) {
     $result = $stmt->get_result();
-    $rice += $result->fetch_row()[0];
+    $rice = $result->fetch_row()[0];
   }
   $result->free();
 }
@@ -100,7 +93,7 @@ if ($stmt = $conn->prepare($sql)) {
 
   if ($stmt->execute()) {
     $result = $stmt->get_result();
-    $beans += $result->fetch_row()[0];
+    $beans = $result->fetch_row()[0];
   }
   $result->free();
 }
@@ -114,7 +107,7 @@ if ($stmt = $conn->prepare($sql)) {
 
   if ($stmt->execute()) {
     $result = $stmt->get_result();
-    $millet += $result->fetch_row()[0];
+    $millet = $result->fetch_row()[0];
   }
   $result->free();
 }
