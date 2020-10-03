@@ -138,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="text" class="form-control" id="cereal" placeholder="Name" name="cereal" required>
                     <span class="form-text text-danger"><small><?php echo $cereal_err; ?></small></span>
                   </div>
-                  <button class="btn btn-info text-capitalize btn-block">Save</button>
+                  <button class="btn btn-primary text-capitalize btn-block">Save</button>
                 </form>
               </div>
             </div>

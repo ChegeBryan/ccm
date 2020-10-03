@@ -139,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                            required>
                     <span class="form-text text-danger"><small><?php echo $county_err; ?></small></span>
                   </div>
-                  <button class="btn btn-info text-capitalize btn-block">Add County</button>
+                  <button class="btn btn-primary text-capitalize btn-block">Add County</button>
                 </form>
               </div>
             </div>
