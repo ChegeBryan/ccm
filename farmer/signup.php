@@ -83,11 +83,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO ccm_farmers (fullname, username, national_id, mobile_number, email, location, password, pic) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     if ($stmt = $conn->prepare($sql)) {
-      $stmt->bind_param("ssisssss", $param_fullname, $param_username, $param_id_number, $param_mobile, $param_email, $param_location, $param_password, $param_pic);
+      $stmt->bind_param("ssssssss", $param_fullname, $param_username, $param_id_number, $param_mobile, $param_email, $param_location, $param_password, $param_pic);
 
       $param_fullname = trim($_POST["full_name"]);
       $param_username = $username;
-      $param_id_number = intval($id_number);
+      $param_id_number = $id_number;
       $param_mobile = trim($_POST["mobile_number"]);
       $param_email = trim($_POST["email"]);
       $param_location = intval($_POST["county"]);
@@ -97,7 +97,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if ($stmt->execute()) {
         header("location: login.php");
       } else {
-        header("location: ../error.php");
+        echo $conn->error;
+        //header("location: ../error.php");
       }
       $stmt->close();
     }
