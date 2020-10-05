@@ -53,7 +53,7 @@ require_once '../includes/config.php';
 
               <div class="card-body">
                 <?php
-              $sql = "SELECT ccm_appointments.id, quantity, pick_date, confirmed_on, ccm_farmers.id AS farmer, fullname, username, national_id, ccm_farm_inputs.farm_input  \n"
+              $sql = "SELECT ccm_appointments.id, quantity, total_cost, pick_date, confirmed_on, ccm_farmers.id AS farmer, fullname, username, national_id, ccm_farm_inputs.farm_input  \n"
 
                 . "FROM ccm_appointments \n"
 
@@ -87,6 +87,7 @@ require_once '../includes/config.php';
                           <th scope='col'>National Id No.</th>
                           <th scope='col'>Picked</th>
                           <th scope='col'>Quantity (Kgs)</th>
+                          <th scope='col'>Cost (Ksh)</th>
                           <th scope='col'>Picked On</th>
                           <th scope='col'>Action</th>";
                     echo "</tr>";
@@ -94,6 +95,7 @@ require_once '../includes/config.php';
                     echo "<tbody>";
 
                     $n = 1;
+
 
                     while ($row = $result->fetch_array()) {
                       echo "<tr>";
@@ -103,6 +105,7 @@ require_once '../includes/config.php';
                       echo "<td>" . $row['national_id'] . "</td>";
                       echo "<td>" . $row['farm_input'] . "</td>";
                       echo "<td>" . $row['quantity'] . "</td>";
+                      echo "<td align='right'>" . number_format($row['total_cost'], 2) . "</td>";
                       echo "<td>" . date('M-d-Y', strtotime($row['pick_date'])) . "</td>";
                       echo "<td><a class='btn btn-secondary text-white btn-sm' href='i_payments.php?staff=" . $_GET['staff'] .  "&appointment=" . $row['id'] . "&farmer=" . $row['farmer'] . "'>Payment</a></td>";
 
@@ -128,33 +131,57 @@ require_once '../includes/config.php';
             <div class="card shadow mb-4">
               <!-- Card Header - Dropdown -->
               <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-dark">Receive Payment</h6>
+                <h6 class="m-0 font-weight-bold text-dark">Confirm Payment</h6>
               </div>
               <!-- Card Body -->
               <div class="card-body">
                 <?php
               if (isset($_GET['appointment'])) {
+
+                $sql = "SELECT total_cost FROM ccm_appointments WHERE id=?";
+
+                if ($stmt = $conn->prepare($sql)) {
+
+                  $stmt->bind_param("i", $param_id);
+                  $param_id = trim($_GET["appointment"]);
+                  if ($stmt->execute()) {
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows == 1) {
+                      $row = $result->fetch_array(MYSQLI_ASSOC);
+                      $total = "Ksh. " . number_format($row['total_cost'], 2);
+                    } else {
+                      echo "Please login to update details.";
+                      exit();
+                    }
+                  } else {
+                    header('location: ../error.php');
+                  }
+                }
+
                 echo <<<EOT
-                <form action="receive_payment.php?staff={$_GET['staff']}&appointment={$_GET['appointment']}&farmer={$_GET['farmer']}" method="POST"
-                class="needs-validation" novalidate>
-                <div class="form-group">
-                  <label for="amount" class="text-secondary">Amount (Kshs.)</label>
-                  <input type="number" class="form-control" id="amount" placeholder="Amount paid in" name="amount"
-                         required>
-                  <span class="form-text"><small></small></span>
-                </div>
-                <div class="form-group">
-                  <label for="cereal" class="text-secondary">Mode of Payment</label>
-                  <select class="custom-select" id="mode" name="mode" required>
-                    <option selected disabled value="">Payment received through...</option>
-                    <option value="Cash">Cash</option>
-                    <option value="M-Pesa">M-Pesa</option>
-                    <option value="Bank Deposit">Bank Deposit</option>
-                  </select>
-                </div>
-                <button class="btn btn-secondary text-white text-capitalize btn-block">Record Payment</button>
-                </form>
-                EOT;
+                       <form
+                       action="receive_payment.php?staff={$_GET['staff']}&appointment={$_GET['appointment']}&farmer={$_GET['farmer']}"
+                       method="POST"
+                       class="needs-validation" novalidate>
+                  <div class="form-group">
+                    <label for="amount" class="text-secondary">Confirm payment of the following amount (Kshs.)</label>
+                    <input type="text" readonly class="form-control-plaintext" id="amount"
+                           value="{$total}">
+                    <span class="form-text"><small></small></span>
+                  </div>
+                  <div class="form-group">
+                    <label for="cereal" class="text-secondary">Mode of Payment</label>
+                    <select class="custom-select" id="mode" name="mode" required>
+                      <option selected disabled value="">Payment received through...</option>
+                      <option value="Cash">Cash</option>
+                      <option value="M-Pesa">M-Pesa</option>
+                      <option value="Bank Deposit">Bank Deposit</option>
+                    </select>
+                  </div>
+                  <button class="btn btn-secondary text-white text-capitalize btn-block">Record Payment</button>
+                  </form>
+                  EOT;
               } else {
                 echo "<p class='card-text'>Select payment to process.</p>";
               }
