@@ -53,7 +53,7 @@ require_once '../includes/config.php';
 
               <div class="card-body">
                 <?php
-              $sql = "SELECT ccm_bookings.id, quantity_to_deliver, date_booked, delivery_date, fullname, username, ccm_cereals.grain  \n"
+              $sql = "SELECT ccm_bookings.id, quantity_to_deliver, date_booked, delivery_date, fullname, username, national_id, ccm_cereals.grain  \n"
 
                 . "FROM ccm_bookings \n"
 
@@ -84,6 +84,7 @@ require_once '../includes/config.php';
                     echo "<th scope='col'>#</th>
                           <th scope='col'>Full Name</th>
                           <th scope='col'>User name</th>
+                          <th scope='col'>National Id No.</th>
                           <th scope='col'>Delivering</th>
                           <th scope='col'>Quantity (Kgs)</th>
                           <th scope='col'>Delivered On</th>
@@ -100,6 +101,7 @@ require_once '../includes/config.php';
                       echo "<td>" . $n . "</td>";
                       echo "<td>" . $row['fullname'] . "</td>";
                       echo "<td>" . $row['username'] . "</td>";
+                      echo "<td>" . $row['national_id'] . "</td>";
                       echo "<td>" . $row['grain'] . "</td>";
                       echo "<td>" . $row['quantity_to_deliver'] . "</td>";
                       echo "<td>" . date('M-d-Y', strtotime($row['delivery_date'])) . "</td>";
