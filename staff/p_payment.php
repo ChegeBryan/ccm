@@ -53,7 +53,7 @@ require_once '../includes/config.php';
 
               <div class="card-body">
                 <?php
-              $sql = "SELECT ccm_bookings.id, quantity_to_deliver, date_booked, delivery_date, fullname, username, national_id, ccm_cereals.grain  \n"
+              $sql = "SELECT ccm_bookings.id, quantity_to_deliver, date_booked, delivery_date, fullname, username, total_cost, national_id, ccm_cereals.grain  \n"
 
                 . "FROM ccm_bookings \n"
 
@@ -87,6 +87,7 @@ require_once '../includes/config.php';
                           <th scope='col'>National Id No.</th>
                           <th scope='col'>Delivering</th>
                           <th scope='col'>Quantity (Kgs)</th>
+                          <th scope='col'>Total Payout (Ksh.)</th>
                           <th scope='col'>Delivered On</th>
                           <th scope='col'>Action</th>
                           ";
@@ -104,6 +105,7 @@ require_once '../includes/config.php';
                       echo "<td>" . $row['national_id'] . "</td>";
                       echo "<td>" . $row['grain'] . "</td>";
                       echo "<td>" . $row['quantity_to_deliver'] . "</td>";
+                      echo "<td align='right'>" . number_format($row['total_cost'], 2) . "</td>";
                       echo "<td>" . date('M-d-Y', strtotime($row['delivery_date'])) . "</td>";
                       echo "<td><a class='btn btn-secondary text-white btn-sm' href='p_payment.php?staff=" . $_GET['staff'] .  "&booking=" . $row['id'] . "'>Payment</a></td>";
 
@@ -136,14 +138,33 @@ require_once '../includes/config.php';
               <div class="card-body">
                 <?php
               if (isset($_GET['booking'])) {
+
+                $sql = "SELECT total_cost FROM ccm_bookings WHERE id=?";
+
+                if ($stmt = $conn->prepare($sql)) {
+
+                  $stmt->bind_param("i", $param_id);
+                  $param_id = trim($_GET["booking"]);
+                  if ($stmt->execute()) {
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows == 1) {
+                      $row = $result->fetch_array(MYSQLI_ASSOC);
+                      $total = "Ksh. " . number_format($row['total_cost'], 2);
+                    } else {
+                      echo "Please login to update details.";
+                      exit();
+                    }
+                  } else {
+                    header('location: ../error.php');
+                  }
+                }
                 echo <<<EOT
                 <form action="make_payment.php?staff={$_GET['staff']}&booking={$_GET['booking']}" method="POST"
                 class="needs-validation" novalidate>
                 <div class="form-group">
-                  <label for="amount" class="text-secondary">Amount (Kshs.)</label>
-                  <input type="number" class="form-control" id="amount" placeholder="Amount paid out" name="amount"
-                         required>
-                  <span class="form-text"><small></small></span>
+                  <label for="amount" class="text-secondary">Amount (Kshs.) to pay to farmer</label>
+                  <input type="text" readonly class="form-control-plaintext" id="amount" name="amount" value="{$total}">
                 </div>
                 <div class="form-group">
                   <label for="cereal" class="text-secondary">Mode of Payment</label>
