@@ -83,7 +83,7 @@ require_once '../includes/config.php';
                             echo "<tr>";
                             echo "<td>" . $row["farm_input"] . "</td>";
                             echo "<td>" . $row['quantity'] . "</td>";
-                            echo "<td align='right'>" . number_format($row['total_cost']) . "</td>";
+                            echo "<td align='right'>" . number_format($row['total_cost'], 2) . "</td>";
                             echo "<td>" . date_format(date_create($row['made_on']), "d-M-Y") . "</td>";
                             echo "<td>" . date_format(date_create($row['pick_date']), "d-M-Y") . "</td>";
                             echo "</tr>";
