@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
 
-  $sql = "INSERT INTO ccm_bookings (booked_by, product_to_deliver, quantity_to_deliver, delivery_date) VALUES (?, ?, ?, ?)";
+  $sql = "INSERT INTO ccm_bookings (booked_by, product_to_deliver, quantity_to_deliver, total_cost, delivery_date) VALUES (?, ?, ?, ?, ?)";
 
   if ($stmt = $conn->prepare($sql)) {
     $stmt->bind_param("iidds", $param_farmer, $param_product, $param_quantity, $param_total_cost, $param_date);

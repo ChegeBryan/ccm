@@ -64,7 +64,7 @@ require_once '../includes/config.php';
                     </thead>
                     <tbody>
                       <?php
-                    $sql = "SELECT grain, quantity_to_deliver, date_booked, delivery_date
+                    $sql = "SELECT grain, quantity_to_deliver, date_booked, delivery_date, total_cost
                     FROM ccm_bookings
                     JOIN ccm_cereals
                     ON ccm_bookings.product_to_deliver=ccm_cereals.id
@@ -85,7 +85,7 @@ require_once '../includes/config.php';
                             echo "<tr>";
                             echo "<td>" . $row["grain"] . "</td>";
                             echo "<td>" . $row['quantity_to_deliver'] . "</td>";
-                            echo "<td>" . number_format($row['total_cost'], 2) . "</td>";
+                            echo "<td align='right'>" . number_format($row['total_cost'], 2) . "</td>";
                             echo "<td>" . date_format(date_create($row['date_booked']), "d-M-Y") . "</td>";
                             echo "<td>" . date_format(date_create($row['delivery_date']), "d-M-Y") . "</td>";
                             echo "</tr>";
