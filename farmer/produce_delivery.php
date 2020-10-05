@@ -57,6 +57,7 @@ require_once '../includes/config.php';
                       <tr>
                         <th>Product</th>
                         <th>Quantity (Kgs)</th>
+                        <th>Total Cost (Ksh.)</th>
                         <th>Booked on</th>
                         <th>To Deliver On</th>
                       </tr>
@@ -84,6 +85,7 @@ require_once '../includes/config.php';
                             echo "<tr>";
                             echo "<td>" . $row["grain"] . "</td>";
                             echo "<td>" . $row['quantity_to_deliver'] . "</td>";
+                            echo "<td>" . number_format($row['total_cost'], 2) . "</td>";
                             echo "<td>" . date_format(date_create($row['date_booked']), "d-M-Y") . "</td>";
                             echo "<td>" . date_format(date_create($row['delivery_date']), "d-M-Y") . "</td>";
                             echo "</tr>";
