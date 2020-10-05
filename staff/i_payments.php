@@ -21,39 +21,39 @@ require_once '../includes/config.php';
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <title>Farm Input Payments</title>
-  <?php include '../head.php'; ?>
-  <link rel="stylesheet" href="../css/dashboard.css">
-</head>
+  <head>
+    <title>Farm Input Payments</title>
+    <?php include '../head.php'; ?>
+    <link rel="stylesheet" href="../css/dashboard.css">
+  </head>
 
-<body>
+  <body>
 
-  <div class="d-flex">
+    <div class="d-flex">
 
-    <?php include 'menu.php'; ?>
-    <!-- Begin Page Content -->
-    <div class="container-fluid pt-9">
+      <?php include 'menu.php'; ?>
+      <!-- Begin Page Content -->
+      <div class="container-fluid pt-9">
 
-      <!-- Page Heading -->
-      <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-secondary">Farm Input Payments</h1>
-      </div>
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-secondary">Farm Input Payments</h1>
+        </div>
 
-      <?php include 'summary.php'; ?>
+        <?php include 'summary.php'; ?>
 
-      <div class="row">
+        <div class="row">
 
-        <!-- Area Chart -->
-        <div class="col-lg-8">
-          <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-dark">Payments Due</h6>
-            </div>
+          <!-- Area Chart -->
+          <div class="col-lg-8">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-dark">Payments Due</h6>
+              </div>
 
-            <div class="card-body">
-              <?php
-              $sql = "SELECT ccm_appointments.id, quantity, pick_date, confirmed_on, ccm_farmers.id AS farmer, fullname, username, ccm_farm_inputs.farm_input  \n"
+              <div class="card-body">
+                <?php
+              $sql = "SELECT ccm_appointments.id, quantity, pick_date, confirmed_on, ccm_farmers.id AS farmer, fullname, username, national_id, ccm_farm_inputs.farm_input  \n"
 
                 . "FROM ccm_appointments \n"
 
@@ -84,6 +84,7 @@ require_once '../includes/config.php';
                     echo "<th scope='col'>#</th>
                           <th scope='col'>Full Name</th>
                           <th scope='col'>User name</th>
+                          <th scope='col'>National Id No.</th>
                           <th scope='col'>Picked</th>
                           <th scope='col'>Quantity (Kgs)</th>
                           <th scope='col'>Picked On</th>
@@ -99,6 +100,7 @@ require_once '../includes/config.php';
                       echo "<td>" . $n . "</td>";
                       echo "<td>" . $row['fullname'] . "</td>";
                       echo "<td>" . $row['username'] . "</td>";
+                      echo "<td>" . $row['national_id'] . "</td>";
                       echo "<td>" . $row['farm_input'] . "</td>";
                       echo "<td>" . $row['quantity'] . "</td>";
                       echo "<td>" . date('M-d-Y', strtotime($row['pick_date'])) . "</td>";
@@ -117,20 +119,20 @@ require_once '../includes/config.php';
               }
               $stmt->close();
               ?>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Pie Chart -->
-        <div class="col-lg-4">
-          <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-dark">Receive Payment</h6>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-              <?php
+          <!-- Pie Chart -->
+          <div class="col-lg-4">
+            <div class="card shadow mb-4">
+              <!-- Card Header - Dropdown -->
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-dark">Receive Payment</h6>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                <?php
               if (isset($_GET['appointment'])) {
                 echo <<<EOT
                 <form action="receive_payment.php?staff={$_GET['staff']}&appointment={$_GET['appointment']}&farmer={$_GET['farmer']}" method="POST"
@@ -157,24 +159,24 @@ require_once '../includes/config.php';
                 echo "<p class='card-text'>Select payment to process.</p>";
               }
               ?>
-            </div>
+              </div>
 
+            </div>
           </div>
         </div>
       </div>
+      <!-- /.container-fluid -->
     </div>
-    <!-- /.container-fluid -->
-  </div>
-  <!-- Logout Modal-->
-  <?php include '../logout_modal.php'; ?>
+    <!-- Logout Modal-->
+    <?php include '../logout_modal.php'; ?>
 
 
-  <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.min.js"></script>
 
-  <script src="../assets/js/popper.min.js"></script>
-  <script src="../assets/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
-  <script src="../js/validate_form.js"></script>
-  <script src="../js/deny_resbumission.js"></script>
-</body>
+    <script src="../assets/js/popper.min.js"></script>
+    <script src="../assets/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+    <script src="../js/validate_form.js"></script>
+    <script src="../js/deny_resbumission.js"></script>
+  </body>
 
 </html>
