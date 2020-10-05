@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
               <div class="card-body">
                 <?php
-              $sql = "SELECT farm_input, cost FROM ccm_farm_inputs";
+              $sql = "SELECT id, farm_input, cost FROM ccm_farm_inputs";
 
               if ($result = $conn->query($sql)) {
                 echo "<div class='table-responsive'>";
@@ -101,6 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<th scope='col'>#</th>";
                 echo "<th scope='col'>Fertilizer</th>";
                 echo "<th scope='col'>Cost per Kg (Ksh.)</th>";
+                echo "<th>Actions</th>";
                 echo "</tr>";
                 echo "</thead>";
                 echo "<tbody>";
@@ -112,6 +113,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   echo "<td>" . $n . "</td>";
                   echo "<td>" . $row['farm_input'] . "</td>";
                   echo "<td align='right'>" . $row['cost'] . "</td>";
+                  echo "<td class='d-flex justify-content-around'>
+                  <a href='edit_fertilizer.php?admin=" . $_GET['admin'] . "&fertilizer=" . $row['id'] . "' class='btn btn-info btn-sm'><i class='fa fa-fw fa-edit'></i></a>
+                  <a href='delete_fertilizer.php?admin=" . $_GET['admin'] . "&fertilizer=" . $row['id'] . "' class='btn btn-danger btn-sm'><i class='fa fa-fw fa-trash'></i></a></td>";
                   echo "</tr>";
 
                   $n++;
