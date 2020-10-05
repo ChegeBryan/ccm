@@ -55,14 +55,14 @@ require_once '../includes/config.php';
                       <tr>
                         <th>Farm input</th>
                         <th>Quantity (Kgs)</th>
+                        <th>Amount to pay (Ksh.)</th>
                         <th>Booked on</th>
                         <th>Pick up Date</th>
-                        <th>Pick up Time</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
-                    $sql = "SELECT ccm_farm_inputs.farm_input, quantity, pick_date, made_on
+                    $sql = "SELECT ccm_farm_inputs.farm_input, quantity, pick_date, made_on, total_cost
                     FROM ccm_appointments
                     JOIN ccm_farm_inputs
                     ON ccm_appointments.farm_input=ccm_farm_inputs.id
@@ -83,9 +83,9 @@ require_once '../includes/config.php';
                             echo "<tr>";
                             echo "<td>" . $row["farm_input"] . "</td>";
                             echo "<td>" . $row['quantity'] . "</td>";
+                            echo "<td align='right'>" . number_format($row['total_cost']) . "</td>";
                             echo "<td>" . date_format(date_create($row['made_on']), "d-M-Y") . "</td>";
                             echo "<td>" . date_format(date_create($row['pick_date']), "d-M-Y") . "</td>";
-                            echo "<td>" . date_format(date_create($row['pick_date']), "H:i") . "</td>";
                             echo "</tr>";
                           }
                         } else {
