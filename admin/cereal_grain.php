@@ -145,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <span class="form-text text-danger"><small><?php echo $cereal_err; ?></small></span>
                   </div>
                   <div class="form-group">
-                    <label for="cost" class="text-secondary">Cost <small class="text-secondary">/ Kg</small></label>
+                    <label for="cost" class="text-secondary">Cost <small class="text-secondary">per Kg</small></label>
                     <input type="number" class="form-control" id="cost" placeholder="Ksh." name="cost" min="1" required>
                   </div>
                   <button class="btn btn-primary text-capitalize btn-block">Save</button>
