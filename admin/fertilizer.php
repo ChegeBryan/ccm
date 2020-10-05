@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $param_cost = $_POST["cost"];
 
       if ($stmt->execute()) {
-        header("location: fertilizers.php?admin=" . $_GET["admin"]);
+        header("location: fertilizer.php?admin=" . $_GET["admin"]);
       } else {
         echo "Oops! Something went wrong. Please try again later.";
       }

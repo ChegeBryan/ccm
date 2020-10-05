@@ -147,7 +147,7 @@
       <hr class="sidebar-divider">
 
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo 'fertilizers.php?admin=' . $_SESSION['admin_id']; ?>">
+        <a class="nav-link" href="<?php echo 'fertilizer.php?admin=' . $_SESSION['admin_id']; ?>">
           <i class="fa fa fa-leaf fa-fw"></i>
           <span>Fertilizers</span></a>
       </li>
