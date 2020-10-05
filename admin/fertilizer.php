@@ -146,10 +146,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                            required>
                     <span class="form-text text-danger"><small><?php echo $fertilizer_err; ?></small></span>
                   </div>
-                  <div class="form-group <?php echo (!empty($cost_err)) ? 'has-error' : ''; ?>">
+                  <div class="form-group">
                     <label for="cost" class="text-secondary">Cost <small class="text-secondary">/ Kg</small></label>
                     <input type="number" class="form-control" id="cost" placeholder="Ksh." name="cost" min="1" required>
-                    <span class="form-text text-danger"><small><?php echo $cost_err; ?></small></span>
                   </div>
                   <button class="btn btn-primary text-capitalize btn-block">Save</button>
                 </form>
