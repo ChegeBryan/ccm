@@ -38,12 +38,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
   if (empty($cereal_err)) {
-    $sql = "INSERT INTO ccm_cereals (grain) VALUES (?)";
+    $sql = "INSERT INTO ccm_cereals (grain, cost) VALUES (?, ?)";
 
     if ($stmt = $conn->prepare($sql)) {
-      $stmt->bind_param("s", $param_cereal);
+      $stmt->bind_param("sd", $param_cereal, $param_cost);
 
       $param_cereal = $cereal;
+      $param_cost = $_POST["cost"];
 
       if ($stmt->execute()) {
         header("location: cereal_grain.php?admin=" . $_GET["admin"]);
@@ -90,15 +91,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
               <div class="card-body">
                 <?php
-              $sql = "SELECT grain FROM ccm_cereals";
+              $sql = "SELECT grain, cost FROM ccm_cereals";
 
               if ($result = $conn->query($sql)) {
                 echo "<div class='table-responsive'>";
                 echo "<table class='table table-bordered table-sm'>";
                 echo "<thead class='text-secondary'>";
                 echo "<tr>";
-                echo "<th scope='col'>#</th>
-                          <th scope='col'>Cereal/Grain</th>";
+                echo "<th scope='col'>#</th>";
+                echo "<th scope='col'>Cereal/Grain</th>";
+                echo "<th scope='col'>Cost per Kg</th>";
                 echo "</tr>";
                 echo "</thead>";
                 echo "<tbody>";
@@ -109,6 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   echo "<tr>";
                   echo "<td>" . $n . "</td>";
                   echo "<td>" . $row['grain'] . "</td>";
+                  echo "<td align='right'>" . number_format($row['cost'], 2) . "</td>";
                   echo "</tr>";
 
                   $n++;
@@ -137,6 +140,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="cereal" class="text-secondary">Cereal / Grain Name</label>
                     <input type="text" class="form-control" id="cereal" placeholder="Name" name="cereal" required>
                     <span class="form-text text-danger"><small><?php echo $cereal_err; ?></small></span>
+                  </div>
+                  <div class="form-group">
+                    <label for="cost" class="text-secondary">Cost <small class="text-secondary">/ Kg</small></label>
+                    <input type="number" class="form-control" id="cost" placeholder="Ksh." name="cost" min="1" required>
                   </div>
                   <button class="btn btn-primary text-capitalize btn-block">Save</button>
                 </form>
