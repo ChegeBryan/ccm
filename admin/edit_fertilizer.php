@@ -65,7 +65,7 @@ require_once '../includes/config.php';
               }
               ?>
                 <!-- Card Body -->
-                <form action="<?php echo "update_fertilizer.php=" . "fertilizer=" . $row["id"]; ?>" method="POST"
+                <form action="<?php echo "update_fertilizer.php?" . "fertilizer=" . $row["id"]; ?>" method="POST"
                       class="needs-validation" novalidate>
                   <div class="form-group <?php echo (!empty($fertilizer_err)) ? 'has-error' : ''; ?>">
                     <label for="fertilizer" class="text-secondary">Fertilizer Name</label>
