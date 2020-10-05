@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
               <div class="card-body">
                 <?php
-              $sql = "SELECT grain, cost FROM ccm_cereals";
+              $sql = "SELECT id, grain, cost FROM ccm_cereals";
 
               if ($result = $conn->query($sql)) {
                 echo "<div class='table-responsive'>";
@@ -100,7 +100,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<tr>";
                 echo "<th scope='col'>#</th>";
                 echo "<th scope='col'>Cereal/Grain</th>";
-                echo "<th scope='col'>Cost per Kg</th>";
+                echo "<th scope='col'>Cost per Kg (Ksh.)</th>";
+                echo "<th scope='col'>Actions</th>";
                 echo "</tr>";
                 echo "</thead>";
                 echo "<tbody>";
@@ -112,6 +113,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   echo "<td>" . $n . "</td>";
                   echo "<td>" . $row['grain'] . "</td>";
                   echo "<td align='right'>" . number_format($row['cost'], 2) . "</td>";
+                  echo "<td class='d-flex justify-content-center'>
+                  <a href='edit_grain.php?admin=" . $_GET['admin'] . "&grain=" . $row['id'] . "' class='btn btn-info btn-sm'><i class='fa fa-fw fa-edit'></i></a></td>";
                   echo "</tr>";
 
                   $n++;
