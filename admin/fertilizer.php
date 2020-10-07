@@ -91,6 +91,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
               <div class="card-body">
                 <?php
+              if (isset($_SESSION["success_message"])) {
+                echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>";
+                echo $_SESSION["success_message"];
+                echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                unset($_SESSION["success_message"]);
+              }
+              ?>
+                <?php
               $sql = "SELECT id, farm_input, cost FROM ccm_farm_inputs";
 
               if ($result = $conn->query($sql)) {

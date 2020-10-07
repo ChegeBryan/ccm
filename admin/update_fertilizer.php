@@ -51,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $param_id = $_GET["fertilizer"];
 
       if ($stmt->execute()) {
+        $_SESSION["success_message"] = "Fertilizer details updated.";
         header("location: fertilizer.php?admin=" . $_SESSION["admin_id"]);
       } else {
         header("location: ../error.php");
