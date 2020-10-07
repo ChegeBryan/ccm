@@ -90,15 +90,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
               <div class="card-body">
                 <?php
-              $sql = "SELECT county FROM ccm_counties";
+              $sql = "SELECT id, county FROM ccm_counties";
 
               if ($result = $conn->query($sql)) {
                 echo "<div class='table-responsive'>";
                 echo "<table class='table table-bordered table-sm'>";
                 echo "<thead class='text-secondary'>";
                 echo "<tr>";
-                echo "<th scope='col'>#</th>
-                          <th scope='col'>County</th>";
+                echo "<th scope='col'>#</th><th scope='col'>County</th><th scope='col'>Actions</th>";
                 echo "</tr>";
                 echo "</thead>";
                 echo "<tbody>";
@@ -109,6 +108,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   echo "<tr>";
                   echo "<td>" . $n . "</td>";
                   echo "<td>" . $row['county'] . "</td>";
+                  echo "<td class='d-flex justify-content-around'>
+                  <a href='edit_county.php?admin=" . $_GET['admin'] . "&county=" . $row['id'] . "' class='btn btn-info btn-sm'><i class='fa fa-fw fa-edit'></i> Edit</a>
+                  <a href='delete_county.php?admin=" . $_GET['admin'] . "&county=" . $row['id'] . "' class='btn btn-danger btn-sm'><i class='fa fa-fw fa-trash'></i> Delete</a></td>";
                   echo "</tr>";
 
                   $n++;
