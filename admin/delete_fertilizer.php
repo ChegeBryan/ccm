@@ -12,10 +12,10 @@ if ($stmt = $conn->prepare($sql)) {
 
   if ($stmt->execute()) {
     $_SESSION["success_message"] = "Fertilizer delete.";
-    header("location: fertilizer.php?admin=" . $_SESSION["admin"]);
+    header("location: fertilizer.php?admin=" . $_SESSION["admin_id"]);
   } else {
     $_SESSION["error_message"] = "There is associated farmer records. Deletion aborted.";
-    header("location: fertilizer.php?admin=" . $_SESSION["admin"]);
+    header("location: fertilizer.php?admin=" . $_SESSION["admin_id"]);
   }
   $stmt->close();
 }
