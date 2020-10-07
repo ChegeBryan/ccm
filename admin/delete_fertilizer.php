@@ -11,6 +11,7 @@ if ($stmt = $conn->prepare($sql)) {
   $param_fertilizer = intval($_GET["fertilizer"]);
 
   if ($stmt->execute()) {
+    $_SESSION["success_message"] = "Fertilizer delete.";
     header("location: fertilizer.php?admin=" . $_SESSION["admin"]);
   } else {
     echo "Oops! Something went wrong. Please try again later.";
