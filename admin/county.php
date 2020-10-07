@@ -122,8 +122,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   echo "<td>" . $n . "</td>";
                   echo "<td>" . $row['county'] . "</td>";
                   echo "<td class='d-flex justify-content-around'>
-                  <a href='edit_county.php?admin=" . $_GET['admin'] . "&county=" . $row['id'] . "' class='btn btn-info btn-sm'><i class='fa fa-fw fa-edit'></i> Edit</a>
-                  <a href='delete_county.php?admin=" . $_GET['admin'] . "&county=" . $row['id'] . "' class='btn btn-danger btn-sm'><i class='fa fa-fw fa-trash'></i> Delete</a></td>";
+                  <a href='edit_county.php?admin=" . $_SESSION['admin_id'] . "&county=" . $row['id'] . "' class='btn btn-info btn-sm'><i class='fa fa-fw fa-edit'></i> Edit</a>
+                  <a href='delete_county.php?admin=" . $_SESSION['admin_id'] . "&county=" . $row['id'] . "' class='btn btn-danger btn-sm'><i class='fa fa-fw fa-trash'></i> Delete</a></td>";
                   echo "</tr>";
 
                   $n++;
