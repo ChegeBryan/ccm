@@ -94,6 +94,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo $_SESSION["success_message"];
                 echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
                 unset($_SESSION["success_message"]);
+              } elseif (isset($_SESSION["error_message"])) {
+                echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>";
+                echo $_SESSION["error_message"];
+                echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                unset($_SESSION["error_message"]);
               }
               ?>
 

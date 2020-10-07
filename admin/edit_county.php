@@ -38,7 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           }
         }
       } else {
-        echo "Oops! Something went wrong. Please try again later.";
+        $_SESSION["error_message"] = "Something went wrong. County name not updated.";
+        header("location: county.php?admin=" . $_SESSION["admin_id"]);
       }
       $stmt->close();
     }
@@ -58,7 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["success_message"] = "County name updated.";
         header("location: county.php?admin=" . $_SESSION["admin_id"]);
       } else {
-        header("location: ../error.php");
+        $_SESSION["error_message"] = "Something went wrong. County name not updated.";
+        header("location: county.php?admin=" . $_SESSION["admin_id"]);
       }
       $stmt->close();
     }
