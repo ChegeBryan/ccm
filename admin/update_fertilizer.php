@@ -29,8 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               $fertilizer = trim($_POST["fertilizer"]);
             }
           }
-        } else {
-          $fertilizer_err = "Verify name entered is correct.";
         }
       } else {
         echo "Oops! Something went wrong. Please try again later.";

@@ -71,13 +71,15 @@ require_once '../includes/config.php';
                     <label for="fertilizer" class="text-secondary">Fertilizer Name</label>
                     <input type="text" class="form-control" id="fertilizer" placeholder="Name" name="fertilizer"
                            value="<?php echo $row["farm_input"] ?>" required>
-                    <span class="form-text text-danger"><small><?php echo $fertilizer_err; ?></small></span>
+                    <span
+                          class="form-text text-danger"><small><?php echo (!empty($fertilizer_err)) ? $fertilizer_err : ''; ?></small></span>
                   </div>
                   <div class="form-group <?php echo (!empty($cost_err)) ? 'has-error' : ''; ?>">
                     <label for="cost" class="text-secondary">Cost <small class="text-secondary">/ Kg</small></label>
                     <input type="number" class="form-control" id="cost" placeholder="Ksh." name="cost" min="1"
                            value="<?php echo $row["cost"]; ?>" required>
-                    <span class="form-text text-danger"><small><?php echo $cost_err; ?></small></span>
+                    <span
+                          class="form-text text-danger"><small><?php echo (!empty($cost_err)) ? $cost_err : ''; ?></small></span>
                   </div>
                   <button class=" btn btn-primary text-capitalize btn-block">Update</button>
                 </form>
