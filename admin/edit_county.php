@@ -55,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $param_id = $_GET["county"];
 
       if ($stmt->execute()) {
+        $_SESSION["success_message"] = "County name updated.";
         header("location: county.php?admin=" . $_SESSION["admin_id"]);
       } else {
         header("location: ../error.php");

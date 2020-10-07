@@ -87,8 +87,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Registered Counties</h6>
               </div>
-
               <div class="card-body">
+                <?php
+              if (isset($_SESSION["success_message"])) {
+                echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>";
+                echo $_SESSION["success_message"];
+                echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                unset($_SESSION["success_message"]);
+              }
+              ?>
+
                 <?php
               $sql = "SELECT id, county FROM ccm_counties";
 
