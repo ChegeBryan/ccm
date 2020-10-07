@@ -14,7 +14,8 @@ if ($stmt = $conn->prepare($sql)) {
     $_SESSION["success_message"] = "Fertilizer delete.";
     header("location: fertilizer.php?admin=" . $_SESSION["admin"]);
   } else {
-    echo "Oops! Something went wrong. Please try again later.";
+    $_SESSION["error_message"] = "There is associated farmer records. Deletion aborted.";
+    header("location: fertilizer.php?admin=" . $_SESSION["admin"]);
   }
   $stmt->close();
 }
