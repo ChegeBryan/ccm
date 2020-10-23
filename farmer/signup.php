@@ -97,8 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if ($stmt->execute()) {
         header("location: login.php");
       } else {
-        echo $conn->error;
-        //header("location: ../error.php");
+        header("location: ../error.php");
       }
       $stmt->close();
     }
