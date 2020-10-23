@@ -154,7 +154,7 @@ require_once '../includes/config.php';
                     <span
                           class="form-text text-danger"><small><?php echo isset($_SESSION["confirm_password_err"]) ? $_SESSION["confirm_password_err"] : ""; ?></small></span>
                   </div>
-                  <button class="btn btn-success">Reset Password</button>
+                  <button class="btn btn-success" type="submit">Reset Password</button>
                 </form>
               </div>
             </div>
