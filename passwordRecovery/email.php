@@ -3,7 +3,7 @@
 
   <head>
     <?php include '../head.php'; ?>
-    <title>Password Reset PHP</title>
+    <title>Password Reset</title>
   </head>
 
   <body>
