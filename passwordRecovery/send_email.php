@@ -1,3 +1,85 @@
+<?php
+
+session_start();
+
+$email_err = "";
+
+require_once '../includes/config.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  if (empty(trim($_POST["email"]))) {
+    $email_err = "Please enter your email.";
+  } else {
+    $email = trim($_POST["email"]);
+  }
+
+  $usertype = $_POST["usertype"];
+  switch ($usertype) {
+    case 'farmer':
+      $user = "ccm_farmers";
+      break;
+
+    case 'staff':
+      $user = "ccm_staff";
+      break;
+
+    case 'advisor':
+      $user = "ccm_advisors";
+      break;
+
+    default:
+      $user = "ccm_farmers";
+      break;
+  }
+
+  if (empty($email_err)) {
+    $sql = "SELECT email FROM ? WHERE email=?";
+
+    if ($stmt = $conn->prepare($sql)) {
+      $stmt->bind_param("ss", $param_table, $param_email);
+
+      $param_table = $user;
+      $param_email = $email;
+
+      if ($stmt->execute()) {
+        $stmt->store_result();
+
+        if ($stmt->num_rows() == 1) {
+          $token = bin2hex(random_bytes(50));
+
+          $sql = "INSERT INTO ccm_password_resets (email, token) VALUES (?, ?)";
+
+          if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param("ss", $param_email, $param_token);
+
+            $param_email = $email;
+            $param_token = $token;
+
+            if ($stmt->execute()) {
+
+              $to = $email;
+              $subject = "Reset your password on County Cereals Management";
+              $msg = "Hi there, click on this <a href='passwordRecovery/new_password.php?token=' . $token . '&user=' . $usertype'>link</a> to reset your password.";
+              $msg = wordwrap($msg, 70);
+              $headers = "From: info@ccm.com";
+              mail($to, $subject, $msg, $headers);
+
+              header("location: email_sent.php?email=" . $email);
+            } else {
+              header("location: ../error.php");
+            }
+            $stmt->close();
+          }
+        } else {
+          $_SESSION["user_error"] = "Sorry, no user exists on our system with that email.";
+        }
+      }
+    }
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
