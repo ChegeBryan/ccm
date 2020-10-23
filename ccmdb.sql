@@ -451,8 +451,9 @@ DROP TABLE IF EXISTS `ccm_password_resets`;
 CREATE TABLE `ccm_password_resets` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(64) NOT NULL,
-  `token` text NOT NULL,
-  PRIMARY KEY (`id`)
+  `token` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token_UNIQUE` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -534,4 +535,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-23 17:05:48
+-- Dump completed on 2020-10-23 17:22:39
