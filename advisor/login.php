@@ -109,6 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <span class="form-text text-danger"><small><?php echo $password_err; ?></small></span>
           </div>
           <button type="submit" class="btn btn-info btn-block">Submit</button>
+          <p class="pt-1">Forgot password? <a href="../passwordRecovery/email.php" class="">Reset</a></p>
         </form>
       </div>
     </div>
