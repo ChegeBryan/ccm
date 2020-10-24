@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if (!empty($user_err)) {
         echo "<div class='alert alert-danger' role='alert'>
-          $user_err;
+          $user_err
           <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
           <span aria-hidden='true'>&times;</span>
           </button>
