@@ -77,8 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $user_err = "Sorry, no user exists on our system with that email.";
         }
       }
-    } else {
-      echo $conn->error;
     }
   }
 }
