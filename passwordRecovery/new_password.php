@@ -28,22 +28,22 @@ if ($_SERVER(['REQUEST_METHOD'] == "POST")) {
   switch ($usertype) {
     case 'farmer':
       $tbl = "ccm_farmers";
+      $tblsql = "UPDATE ccm_farmers SET password = ? WHERE email= ?";
       break;
 
     case 'advisor':
       $tbl = "ccm_advisors";
+      $tblsql = "UPDATE ccm_advisors SET password = ? WHERE email= ?";
       break;
 
     case 'staff':
       $tbl = "ccm_staff";
+      $tblsql = "UPDATE ccm_staff SET password = ? WHERE email= ?";
       break;
 
     default:
       break;
   }
-
-
-
 
   if (empty($_SESSION["new_password_err"]) && empty($_SESSION["confirm_password_err"])) {
 
@@ -62,9 +62,8 @@ if ($_SERVER(['REQUEST_METHOD'] == "POST")) {
 
           if ($stmt->fetch()) {
             if ($email) {
-              $sql = "UPDATE ? SET password = ? WHERE email= ?";
-              if ($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param("sss", $param_table, $param_password, $param_email);
+              if ($stmt = $conn->prepare($$tblsql)) {
+                $stmt->bind_param("ss", $param_password, $param_email);
 
                 $param_table = $tbl;
                 $param_password = trim($_POST["new_psw"]);
