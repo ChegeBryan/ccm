@@ -42,6 +42,8 @@ if ($_SERVER(['REQUEST_METHOD'] == "POST")) {
       break;
 
     default:
+      $tbl = "ccm_farmers";
+      $tblsql = "UPDATE ccm_farmers SET password = ? WHERE email= ?";
       break;
   }
 
@@ -105,7 +107,6 @@ if ($_SERVER(['REQUEST_METHOD'] == "POST")) {
         </li>
       </ul>
     </nav>
-
 
     <div class="container d-flex justify-content-center mt-5">
       <div class="card p-4 shadow" style="width: 400px;">
