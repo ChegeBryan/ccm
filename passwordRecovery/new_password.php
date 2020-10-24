@@ -110,7 +110,7 @@ if ($_SERVER(['REQUEST_METHOD'] == "POST")) {
     <div class="container d-flex justify-content-center mt-5">
       <div class="card p-4 shadow" style="width: 400px;">
         <h4>New Password</h4>
-        <form action="<?php echo "change_password.php?farmer=" . $_GET["farmer"]; ?>" method="POST"
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?token=' . $_GET['token']; ?>" method="POST"
               class="needs-validation" novalidate>
           <div
                class="form-group <?php echo (isset($_SESSION["new_password_err"]) && !empty($_SESSION["new_password_err"])) ? 'has-error' : ''; ?>">
