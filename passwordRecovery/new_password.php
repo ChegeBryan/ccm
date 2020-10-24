@@ -4,7 +4,7 @@ session_start();
 
 require_once '../includes/config.php';
 
-if ($_SERVER(['REQUEST_METHOD'] == "POST")) {
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   if (empty(trim($_POST["new_psw"]))) {
     $_SESSION["new_password_err"] = "Please enter the new password.";
@@ -85,6 +85,7 @@ if ($_SERVER(['REQUEST_METHOD'] == "POST")) {
   } else {
     header("location: " . $_SERVER['HTTP_REFERER']);
   }
+}
 ?>
 
 <!DOCTYPE html>
