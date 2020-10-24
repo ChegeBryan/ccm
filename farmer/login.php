@@ -69,55 +69,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 
-<head>
-  <?php include '../head.php'; ?>
-  <title>Farmer | Login</title>
+  <head>
+    <?php include '../head.php'; ?>
+    <title>Farmer | Login</title>
 
-</head>
+  </head>
 
-<body>
+  <body>
 
-  <nav class="navbar navbar-expand navbar-light bg-white mb-4 shadow">
+    <nav class="navbar navbar-expand navbar-light bg-white mb-4 shadow">
 
-    <a class="navbar-brand text-secondary" href="../index.php">CCM</a>
+      <a class="navbar-brand text-secondary" href="../index.php">CCM</a>
 
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link text-secondary" href="signup.php">Sign Up</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-secondary" href="../index.php">Home</a>
-      </li>
-    </ul>
-  </nav>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link text-secondary" href="signup.php">Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-secondary" href="../index.php">Home</a>
+        </li>
+      </ul>
+    </nav>
 
-  <div class="container d-flex justify-content-center mt-5">
-    <div class="card p-4 shadow" style="width: 400px;">
-      <h4>Farmer login</h4>
-      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="needs-validation" method="POST" novalidate>
-        <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-          <label for="uname"><b>Username</b></label>
-          <input type="text" class="form-control" id="uname" placeholder="Enter username" name="username" value="<?php echo $username; ?>" required>
-          <span class="form-text text-danger"><small><?php echo $username_err; ?></small></span>
-        </div>
-        <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-          <label for=" psw"><b>Password</b></label>
-          <input type="password" class="form-control" id="psw" placeholder="Enter password" name="password" required>
-          <span class="form-text text-danger"><small><?php echo $password_err; ?></small></span>
-        </div>
-        <button type="submit" class="btn btn-primary btn-success btn-block">Submit</button>
-        <p class="pt-1">Forgot password? <a href="../passwordRecovery/email.php" class="">Reset</a></p>
-      </form>
+    <div class="container d-flex justify-content-center mt-5">
+      <div class="card p-4 shadow" style="width: 400px;">
+        <h4>Farmer login</h4>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="needs-validation" method="POST"
+              novalidate>
+          <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" class="form-control" id="uname" placeholder="Enter username" name="username"
+                   value="<?php echo $username; ?>" required>
+            <span class="form-text text-danger"><small><?php echo $username_err; ?></small></span>
+          </div>
+          <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+            <label for=" psw"><b>Password</b></label>
+            <input type="password" class="form-control" id="psw" placeholder="Enter password" name="password" required>
+            <span class="form-text text-danger"><small><?php echo $password_err; ?></small></span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-success btn-block">Submit</button>
+          <p class="pt-1">Forgot password? <a href="../passwordRecovery/send_email.php" class="">Reset</a></p>
+        </form>
+      </div>
     </div>
-  </div>
 
 
-  <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.min.js"></script>
 
-  <script src="../assets/js/popper.min.js"></script>
-  <script src="../assets/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
-  <script src="../js/deny_resubmission.js"> </script>
-  <script src="../js/validate_form.js"> </script>
-</body>
+    <script src="../assets/js/popper.min.js"></script>
+    <script src="../assets/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+    <script src="../js/deny_resubmission.js"> </script>
+    <script src="../js/validate_form.js"> </script>
+  </body>
 
 </html>
