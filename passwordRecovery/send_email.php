@@ -19,28 +19,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   switch ($usertype) {
     case 'farmer':
       $user = "ccm_farmers";
+      $sql = "SELECT email FROM ccm_farmers WHERE email=?";
       break;
 
     case 'staff':
       $user = "ccm_staff";
+      $sql = "SELECT email FROM ccm_staff WHERE email=?";
       break;
 
     case 'advisor':
       $user = "ccm_advisors";
+      $sql = "SELECT email FROM ccm_advisors WHERE email=?";
       break;
 
     default:
       $user = "ccm_farmers";
+      $sql = "SELECT email FROM ccm_farmers WHERE email=?";
       break;
   }
 
   if (empty($email_err)) {
-    $sql = "SELECT email FROM ? WHERE email=?";
-
     if ($stmt = $conn->prepare($sql)) {
-      $stmt->bind_param("ss", $param_table, $param_email);
+      $stmt->bind_param("s", $param_email);
 
-      $param_table = $user;
       $param_email = $email;
 
       if ($stmt->execute()) {
@@ -76,6 +77,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $user_err = "Sorry, no user exists on our system with that email.";
         }
       }
+    } else {
+      echo $conn->error;
     }
   }
 }
