@@ -3,6 +3,7 @@
 session_start();
 
 $email_err = "";
+$user_err = "";
 
 require_once '../includes/config.php';
 
@@ -72,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->close();
           }
         } else {
-          $_SESSION["user_error"] = "Sorry, no user exists on our system with that email.";
+          $user_err = "Sorry, no user exists on our system with that email.";
         }
       }
     }
@@ -108,6 +109,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container d-flex justify-content-center mt-5">
       <div class="card p-4 shadow" style="width: 400px;">
         <h4>Password reset</h4>
+
+        <?php
+
+      if (!empty($user_err)) {
+        echo "<div class='alert alert-danger' role='alert'>
+          $user_err;
+          <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+          <span aria-hidden='true'>&times;</span>
+          </button>
+        </div>";
+      }
+      ?>
+
+
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="needs-validation" method="POST"
               novalidate>
           <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
