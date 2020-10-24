@@ -81,7 +81,7 @@ if ($_SERVER(['REQUEST_METHOD'] == "POST")) {
       }
     }
   } else {
-    header($_SERVER['HTTP_REFERER']);
+    header("location: " . $_SERVER['HTTP_REFERER']);
   }
 ?>
 
