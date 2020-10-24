@@ -1,3 +1,91 @@
+<?php
+
+session_start();
+
+require_once '../includes/config.php';
+
+if ($_SERVER(['REQUEST_METHOD'] == "POST")) {
+
+  if (empty(trim($_POST["new_psw"]))) {
+    $_SESSION["new_password_err"] = "Please enter the new password.";
+  } elseif (strlen(trim($_POST["new_psw"])) < 6) {
+    $_SESSION["new_password_err"] = "Password must have at least 6 characters.";
+  } else {
+    $_SESSION["new_password"] = trim($_POST["new_psw"]);
+  }
+
+  if (empty(trim($_POST["psw_rpt"]))) {
+    $_SESSION["confirm_password_err"] = "Please confirm the password.";
+  } else {
+    $_SESSION["confirm_password"] = trim($_POST["psw_rpt"]);
+    if (empty($_SESSION["confirm_password_err"]) && ($_SESSION["new_password"]  != $_SESSION["confirm_password"])) {
+      $_SESSION["confirm_password_err"] = "Password did not match.";
+    }
+  }
+
+  $usertype = $_POST["usertype"];
+
+  switch ($usertype) {
+    case 'farmer':
+      $tbl = "ccm_farmers";
+      break;
+
+    case 'advisor':
+      $tbl = "ccm_advisors";
+      break;
+
+    case 'staff':
+      $tbl = "ccm_staff";
+      break;
+
+    default:
+      break;
+  }
+
+
+
+
+  if (empty($_SESSION["new_password_err"]) && empty($_SESSION["confirm_password_err"])) {
+
+    $sql = "SELECT email FROM password_reset WHERE token=? LIMIT 1";
+
+    if ($stmt = $conn->prepare($sql)) {
+      $stmt->bind_param("s", $param_token);
+
+      $param_token = $_GET['token'];
+
+      if ($stmt->execute()) {
+        $stmt->store_result();
+
+        if ($stmt->num_rows == 1) {
+          $stmt->bind_result($email);
+
+          if ($stmt->fetch()) {
+            if ($email) {
+              $sql = "UPDATE ? SET password = ? WHERE email= ?";
+              if ($stmt = $conn->prepare($sql)) {
+                $stmt->bind_param("sss", $param_table, $param_password, $param_email);
+
+                $param_table = $tbl;
+                $param_password = trim($_POST["new_psw"]);
+                $param_email = $email;
+
+                if ($stmt->execute()) {
+                  header("location: reset_success.php");
+                } else {
+                  header("location: ../error.php");
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  } else {
+    header($_SERVER['HTTP_REFERER']);
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
