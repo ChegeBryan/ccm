@@ -97,9 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link text-secondary" href="signup.php">Sign Up</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link text-secondary" href="../index.php">Home</a>
         </li>
       </ul>
