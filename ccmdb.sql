@@ -16,14 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `ccmdb`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `ccmdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-
-USE `ccmdb`;
-
---
 -- Table structure for table `ccm_admins`
 --
 
@@ -59,10 +51,11 @@ CREATE TABLE `ccm_advisors` (
   `id` int NOT NULL AUTO_INCREMENT,
   `fullname` varchar(255) NOT NULL,
   `username` varchar(64) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `approved` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf16;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +64,7 @@ CREATE TABLE `ccm_advisors` (
 
 LOCK TABLES `ccm_advisors` WRITE;
 /*!40000 ALTER TABLE `ccm_advisors` DISABLE KEYS */;
-INSERT INTO `ccm_advisors` VALUES (1,'Test User','advisor001','$2y$10$ZSn27Ra3F1zsPrKtBTksQee6s9I4RxDupgbG9Jq4mD2bR.oRkygfW',1),(2,'Zablon Nyakundi','Nya','$2y$10$813txgmrj29vfhXoyGLWn.tno/cqagKe4mIp7wMRwoNMFY9VRrhgS',1),(3,'Zablon Nyakundi','nyaku','$2y$10$F5HtXNF4B/GxBZ.Uw2ynhOfX4dt5pRf.laosCHSpYl4a1Dk/8ALrG',1);
+INSERT INTO `ccm_advisors` VALUES (1,'Test User','advisor001','','$2y$10$ZSn27Ra3F1zsPrKtBTksQee6s9I4RxDupgbG9Jq4mD2bR.oRkygfW',1),(2,'Zablon Nyakundi','Nya','','$2y$10$813txgmrj29vfhXoyGLWn.tno/cqagKe4mIp7wMRwoNMFY9VRrhgS',1),(3,'Zablon Nyakundi','nyaku','','$2y$10$F5HtXNF4B/GxBZ.Uw2ynhOfX4dt5pRf.laosCHSpYl4a1Dk/8ALrG',1),(4,'test advisor','emai@mil.com','emai@mil.com','$2y$10$0/2sNY6tFsx0GnhJUcMoxuJ1/ydwHPEMOipnMFb0qBDZaw4I5UQ3K',0);
 /*!40000 ALTER TABLE `ccm_advisors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -370,7 +363,7 @@ CREATE TABLE `ccm_farmers` (
   KEY `county_fk_id` (`location`),
   CONSTRAINT `ccm_farmers_ibfk_1` FOREIGN KEY (`location`) REFERENCES `ccm_counties` (`id`) ON DELETE RESTRICT,
   CONSTRAINT `county_fk_id` FOREIGN KEY (`location`) REFERENCES `ccm_counties` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf16;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -379,7 +372,7 @@ CREATE TABLE `ccm_farmers` (
 
 LOCK TABLES `ccm_farmers` WRITE;
 /*!40000 ALTER TABLE `ccm_farmers` DISABLE KEYS */;
-INSERT INTO `ccm_farmers` VALUES (2,'Test Farmer','test','234322323','0818171811','test@email.com',1,'../profileImages/profileDefault.png','$2y$10$14g5cJvAYYBDCUbSXlwZyus64ntDu.F8LhFChwi/Ra7seFm1kmP2m',1),(3,'Test Farmer2','farmer002','2838389238','232323232','exampl@exam.ple',1,'../profileImages/profileDefault.png','$2y$10$fk0/y3BDBS5SgjVghsHuLe1WLfON5Sk76EzxzlLjLLlC40MhjM/0i',0);
+INSERT INTO `ccm_farmers` VALUES (2,'Test Farmer','test','234322323','0818171811','test@email.com',1,'../profileImages/profileDefault.png','password',1),(3,'Test Farmer2','farmer002','2838389238','232323232','exampl@exam.ple',1,'../profileImages/profileDefault.png','$2y$10$fk0/y3BDBS5SgjVghsHuLe1WLfON5Sk76EzxzlLjLLlC40MhjM/0i',0);
 /*!40000 ALTER TABLE `ccm_farmers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -454,7 +447,7 @@ CREATE TABLE `ccm_password_resets` (
   `token` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `token_UNIQUE` (`token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -463,6 +456,7 @@ CREATE TABLE `ccm_password_resets` (
 
 LOCK TABLES `ccm_password_resets` WRITE;
 /*!40000 ALTER TABLE `ccm_password_resets` DISABLE KEYS */;
+INSERT INTO `ccm_password_resets` VALUES (1,'test@email.com','3051b35274950182b26ce23eca2e4fd98b11e2a191e0ec0017ff787cb4ce5400148bd65ca38db47da04e6ce059ed7eca342c'),(2,'exampl@exam.ple','cae9fa8dd835fc0cf1be17e3b9b8c321c1812f8045fb51c4cf9dfb257199657f8ce73f580cd47215adf92002a7b011c74e8b');
 /*!40000 ALTER TABLE `ccm_password_resets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -535,4 +529,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-23 17:22:39
+-- Dump completed on 2020-10-25 12:50:59
