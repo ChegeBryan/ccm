@@ -4,7 +4,7 @@ require_once '../includes/config.php';
 $username = $id_number = $password = $confirm_password = "";
 $fullname = $mobile = $email = $id_number = "";
 
-$username_err = $id_number_err = $password_err = $confirm_password_err = "";
+$username_err = $id_number_err = $email_err = $password_err = $confirm_password_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -61,6 +61,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
+  if (empty(trim($_POST["email"]))) {
+    $email_err = "Please enter email address.";
+  } else {
+    $sql = "SELECT id FROM ccm_farmers WHERE email = ? LIMIT 1";
+
+    if ($stmt = $conn->prepare($sql)) {
+      $stmt->bind_param("s", $param_email);
+      $param_email = trim($_POST["email"]);
+
+      if ($stmt->execute()) {
+        $stmt->store_result();
+
+        if ($stmt->num_rows == 1) {
+          $email_err = "Email address is already registered.";
+        } else {
+          $email = trim($_POST["email"]);
+        }
+      } else {
+        echo "Oops! Something went wrong. Please try again later.";
+      }
+      $stmt->close();
+    }
+  }
+
   if (empty(trim($_POST["psw"]))) {
     $password_err = "Please enter a password.";
   } elseif (strlen(trim($_POST["psw"])) < 6) {
@@ -78,7 +102,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
-  if (empty($username_err) && empty($id_number_err) && empty($password_err) && empty($confirm_password_err)) {
+  if (
+    empty($username_err)
+    && empty($id_number_err)
+    && empty($password_err)
+    && empty($confirm_password_err)
+    && empty($email_err)
+  ) {
 
     $sql = "INSERT INTO ccm_farmers (fullname, username, national_id, mobile_number, email, location, password, pic) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -89,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $param_username = $username;
       $param_id_number = $id_number;
       $param_mobile = trim($_POST["mobile_number"]);
-      $param_email = trim($_POST["email"]);
+      $param_email = $email;
       $param_location = intval($_POST["county"]);
       $param_pic = "../profileImages/profileDefault.png";
       $param_password = password_hash($password, PASSWORD_DEFAULT);
@@ -177,12 +207,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
 
           <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6 <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
               <label for="email"><b>Email</b></label>
               <input type="email" placeholder="Enter Email" class="form-control" name="email"
                      value="<?php echo $email; ?>"" required>
-          </div>
-          <div class=" form-group col-md-6">
+              <span class=" form-text text-danger"><small><?php echo $email_err; ?></small></span>
+            </div>
+            <div class=" form-group col-md-6">
               <label for="mobile"><b>Mobile Number</b></label>
               <input type="text" class="form-control" placeholder="Enter mobile number" name="mobile_number"
                      value="<?php echo $mobile; ?>" required>
