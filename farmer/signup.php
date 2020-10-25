@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty(trim($_POST["username"]))) {
     $username_err = "Please enter a username.";
   } else {
-    $sql = "SELECT id FROM ccm_farmers WHERE username = ?";
+    $sql = "SELECT id FROM ccm_farmers WHERE username = ? LIMIT 1";
 
     if ($stmt = $conn->prepare($sql)) {
       $stmt->bind_param("s", $param_username);
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty(trim($_POST["id_number"]))) {
     $id_number_err = "Please enter a national id number.";
   } else {
-    $sql = "SELECT id FROM ccm_farmers WHERE national_id = ?";
+    $sql = "SELECT id FROM ccm_farmers WHERE national_id = ? LIMIT 1";
 
     if ($stmt = $conn->prepare($sql)) {
       $stmt->bind_param("i", $param_id_number);
