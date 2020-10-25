@@ -504,6 +504,7 @@ CREATE TABLE `ccm_staff` (
   `id` int NOT NULL AUTO_INCREMENT,
   `fullname` varchar(255) NOT NULL,
   `username` varchar(64) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `approved` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -516,7 +517,7 @@ CREATE TABLE `ccm_staff` (
 
 LOCK TABLES `ccm_staff` WRITE;
 /*!40000 ALTER TABLE `ccm_staff` DISABLE KEYS */;
-INSERT INTO `ccm_staff` VALUES (1,'test staff','staff001','$2y$10$8ypil407bWk4wpozlhZCN.HAhDjaFI1/uo2p.LjQCqdEIWGll0wMu',1);
+INSERT INTO `ccm_staff` VALUES (1,'test staff','staff001','','$2y$10$8ypil407bWk4wpozlhZCN.HAhDjaFI1/uo2p.LjQCqdEIWGll0wMu',1);
 /*!40000 ALTER TABLE `ccm_staff` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -529,4 +530,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-25 12:50:59
+-- Dump completed on 2020-10-25 12:59:42
