@@ -16,38 +16,42 @@ require_once '../includes/config.php';
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <title>Approved Farmers Profiles</title>
-  <?php include '../head.php'; ?>
-  <link rel="stylesheet" href="../css/dashboard.css">
-</head>
+  <head>
+    <title>Approved Farmers Profiles</title>
+    <?php include '../head.php'; ?>
+    <link rel="stylesheet" href="../css/dashboard.css">
+  </head>
 
-<body>
+  <body>
 
-  <div class="d-flex">
+    <div class="d-flex">
 
-    <?php include 'menu.php'; ?>
-    <!-- Begin Page Content -->
-    <div class="container-fluid pt-9">
+      <?php include 'menu.php'; ?>
+      <!-- Begin Page Content -->
+      <div class="container-fluid pt-9">
 
-      <!-- Page Heading -->
-      <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-secondary">Farmers Profiles</h1>
-      </div>
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-secondary">Farmers Profiles</h1>
 
-      <?php include 'summary.php'; ?>
+        </div>
 
-      <div class="row">
+        <?php include 'summary.php'; ?>
 
-        <!-- Area Chart -->
-        <div class="col-xl-8 col-lg-7">
-          <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary">Approved Farmers</h6>
-            </div>
+        <div class="row">
 
-            <div class="card-body">
-              <?php
+          <!-- Area Chart -->
+          <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Approved Farmers</h6>
+                <a href="../reports/registered_farmers.php" class="btn btn-sm btn-primary pull-right" target="_blank"
+                   download><i class="fa fa-download fa-fw"></i>Generate
+                  Report</a>
+              </div>
+
+              <div class="card-body">
+                <?php
               $sql = "SELECT ccm_farmers.id, fullname,username, mobile_number, national_id, county \n"
 
                 . "FROM ccm_farmers \n"
@@ -106,20 +110,20 @@ require_once '../includes/config.php';
               }
               $stmt->close();
               ?>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Pie Chart -->
-        <div class="col-xl-4 col-lg-5">
-          <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary">Land Utilization</h6>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-              <?php
+          <!-- Pie Chart -->
+          <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+              <!-- Card Header - Dropdown -->
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Land Utilization</h6>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                <?php
               $sql = "SELECT land_size, grain, fullname\n"
 
                 . "FROM ccm_land \n"
@@ -180,21 +184,21 @@ require_once '../includes/config.php';
                 echo "<p class='card-text text-muted'>Select Farmer to view land.</p>";
               }
               ?>
+              </div>
             </div>
           </div>
         </div>
+        <!-- /.container-fluid -->
+
       </div>
-      <!-- /.container-fluid -->
-
-    </div>
-    <!-- Logout Modal-->
-    <?php include '../logout_modal.php'; ?>
+      <!-- Logout Modal-->
+      <?php include '../logout_modal.php'; ?>
 
 
-    <script src="../assets/js/jquery.min.js"></script>
+      <script src="../assets/js/jquery.min.js"></script>
 
-    <script src="../assets/js/popper.min.js"></script>
-    <script src="../assets/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
-</body>
+      <script src="../assets/js/popper.min.js"></script>
+      <script src="../assets/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+  </body>
 
 </html>
