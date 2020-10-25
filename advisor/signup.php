@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
-  if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
+  if (empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err)) {
 
     $sql = "INSERT INTO ccm_advisors (fullname, username, email, password) VALUES (?, ?, ?, ?)";
 
