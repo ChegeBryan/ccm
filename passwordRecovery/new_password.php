@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           <div
                class="form-group <?php echo (isset($_SESSION["new_password_err"]) && !empty($_SESSION["new_password_err"])) ? 'has-error' : ''; ?>">
             <label for="psw" class="text-secondary">New Password</label>
-            <input type="text" class="form-control" placeholder="Enter new password" name="new_psw"
+            <input type="password" class="form-control" placeholder="Enter new password" name="new_psw"
                    value="<?php echo isset($_SESSION["new_password"]) ? $_SESSION["new_password"] : ""; ?>" required>
             <span
                   class="form-text text-danger"><small><?php echo isset($_SESSION["new_password_err"]) ? $_SESSION["new_password_err"] : ""; ?></small></span>
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <label for="psw"
                    class="text-secondary <?php echo (isset($_SESSION["confirm_password_err"]) && !empty($_SESSION["confirm_password_err"])) ? 'has-error' : ''; ?>">Confirm
               New Password</label>
-            <input type="text" class="form-control" placeholder="Confirm Password" name="psw_rpt" required>
+            <input type="password" class="form-control" placeholder="Confirm Password" name="psw_rpt" required>
             <span
                   class="form-text text-danger"><small><?php echo isset($_SESSION["confirm_password_err"]) ? $_SESSION["confirm_password_err"] : ""; ?></small></span>
           </div>
