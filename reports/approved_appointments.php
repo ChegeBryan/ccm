@@ -19,7 +19,7 @@ class PDF extends FPDF
     // Move to the right
     $this->Cell(120);
     // Title
-    $this->Cell(30, 10, 'CCM Registered Farmers', 0, 0, 'R');
+    $this->Cell(30, 10, 'CCM Scheduled Appointments', 0, 0, 'R');
     // Line break
     $this->Ln(13);
   }
