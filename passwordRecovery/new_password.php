@@ -64,10 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
           if ($stmt->fetch()) {
             if ($email) {
-              if ($stmt = $conn->prepare($$tblsql)) {
+              if ($stmt = $conn->prepare($tblsql)) {
                 $stmt->bind_param("ss", $param_password, $param_email);
 
-                $param_table = $tbl;
                 $param_password = trim($_POST["new_psw"]);
                 $param_email = $email;
 
