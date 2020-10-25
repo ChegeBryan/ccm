@@ -1,8 +1,8 @@
 <?php
 require_once '../includes/config.php';
 
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$username = $email = $password = $confirm_password = "";
+$username_err = $email_err = $password_err = $confirm_password_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty(trim($_POST["username"]))) {
@@ -21,6 +21,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $username_err = "This username is already taken.";
         } else {
           $username = trim($_POST["username"]);
+        }
+      } else {
+        echo "Oops! Something went wrong. Please try again later.";
+      }
+      $stmt->close();
+    }
+  }
+
+  if (empty(trim($_POST["email"]))) {
+    $email_err = "Please enter email address.";
+  } else {
+    $sql = "SELECT id FROM ccm_advisors WHERE email = ? LIMIT 1";
+
+    if ($stmt = $conn->prepare($sql)) {
+      $stmt->bind_param("s", $param_email);
+      $param_email = trim($_POST["email"]);
+
+      if ($stmt->execute()) {
+        $stmt->store_result();
+
+        if ($stmt->num_rows == 1) {
+          $email_err = "Email address is already registered.";
+        } else {
+          $email = trim($_POST["email"]);
         }
       } else {
         echo "Oops! Something went wrong. Please try again later.";
@@ -48,13 +72,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
 
-    $sql = "INSERT INTO ccm_advisors (fullname, username, password) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO ccm_advisors (fullname, username, email, password) VALUES (?, ?, ?, ?)";
 
     if ($stmt = $conn->prepare($sql)) {
-      $stmt->bind_param("sss",  $param_fullname, $param_username, $param_password);
+      $stmt->bind_param("ssss",  $param_fullname, $param_username, $param_email, $param_password);
 
       $param_fullname = trim($_POST["full_name"]);
       $param_username = $username;
+      $param_email = $email;
       $param_password = password_hash($password, PASSWORD_DEFAULT);
 
       if ($stmt->execute()) {
@@ -105,6 +130,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="name"><b>Username</b></label>
             <input type="text" class="form-control" placeholder="Enter Username to use" name="username" required>
             <span class="form-text text-danger"><small><?php echo $username_err; ?></small></span>
+          </div>
+          <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Enter Email" class="form-control" name="email"
+                   value="<?php echo $email; ?>"" required>
+              <span class=" form-text text-danger"><small><?php echo $email_err; ?></small></span>
           </div>
           <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
             <label for="psw"><b>Password</b></label>
