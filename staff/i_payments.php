@@ -49,6 +49,8 @@ require_once '../includes/config.php';
             <div class="card shadow mb-4">
               <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-dark">Payments Due</h6>
+                <a href="../reports/farm_input_payments.php" class="btn btn-sm btn-secondary pull-right" target="_blank"
+                   download><i class="fa fa-download fa-fw"></i>Payments Report</a>
               </div>
 
               <div class="card-body">
